@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Research - Anupama Mohan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ocean-deep: #1a365d;
+      --ocean-mid: #2b77ad;
+      --ocean-light: #4da6d9;
+      --seafoam: #7dd3c0;
+      --coral: #ff8a65;
+      --sand: #f4f1e8;
+      --pearl: #fefefe;
+      --text-dark: #2d3748;
+      --text-light: #718096;
+      --accent-gold: #d4af37;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--sand) 0%, var(--pearl) 100%);
+      color: var(--text-dark);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* Animated ocean background */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(125, 211, 192, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(77, 166, 217, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(43, 119, 173, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+      animation: oceanFlow 20s ease-in-out infinite;
+    }
+
+    @keyframes oceanFlow {
+      0%, 100% { transform: translateX(0) translateY(0) scale(1); }
+      33% { transform: translateX(-20px) translateY(-10px) scale(1.02); }
+      66% { transform: translateX(20px) translateY(10px) scale(0.98); }
+    }
+
+    /* Floating particles */
+    .floating-particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(125, 211, 192, 0.3);
+      border-radius: 50%;
+      animation: float 15s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-20px) rotate(360deg); opacity: 0; }
+    }
+
+    /* Enhanced hero image container - Better positioned and more visible */
+    .hero-image-container {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      width: 200px;
+      height: 200px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 
+        0 20px 40px rgba(0,0,0,0.15),
+        0 0 60px rgba(125, 211, 192, 0.3),
+        inset 0 0 0 3px rgba(255, 255, 255, 0.8);
+      transition: all 0.4s ease;
+      border: 4px solid rgba(125, 211, 192, 0.4);
+      backdrop-filter: blur(5px);
+    }
+
+    .hero-image-container:hover {
+      transform: translateY(-50%) scale(1.08) rotate(2deg);
+      box-shadow: 
+        0 30px 60px rgba(0,0,0,0.25),
+        0 0 80px rgba(125, 211, 192, 0.5),
+        inset 0 0 0 3px rgba(255, 255, 255, 1);
+      border-color: var(--seafoam);
+    }
+
+    .hero-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.4s ease;
+      filter: brightness(1.1) contrast(1.05) saturate(1.1);
+    }
+
+    .hero-image-container:hover img {
+      transform: scale(1.1);
+      filter: brightness(1.2) contrast(1.1) saturate(1.2);
+    }
+
+    /* Image label - Makes it more clear what the image represents */
+    .hero-image-container::after {
+      content: 'Research';
+      position: absolute;
+      bottom: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--ocean-mid), var(--seafoam));
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .hero-image-container:hover::after {
+      opacity: 1;
+      bottom: -35px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      width: 100%;
+      background: rgba(254, 254, 254, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(125, 211, 192, 0.2);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 60px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .navbar img.logo {
+      height: 65px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+      transition: transform 0.3s ease;
+    }
+
+    .navbar img.logo:hover {
+      transform: scale(1.05);
+    }
+
+    .navbar nav {
+      display: flex;
+      gap: 40px;
+    }
+
+    .navbar nav a {
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-dark);
+      position: relative;
+      transition: all 0.3s ease;
+      padding: 8px 0;
+    }
+
+    .navbar nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--ocean-mid), var(--seafoam));
+      transition: width 0.3s ease;
+    }
+
+    .navbar nav a:hover::after,
+    .navbar nav a.active::after {
+      width: 100%;
+    }
+
+    .navbar nav a:hover,
+    .navbar nav a.active {
+      color: var(--ocean-mid);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      background: linear-gradient(135deg, 
+        rgba(26, 54, 93, 0.05) 0%, 
+        rgba(125, 211, 192, 0.1) 50%, 
+        rgba(244, 241, 232, 0.8) 100%);
+      text-align: center;
+      padding: 120px 20px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="none"><path d="M0,50 C150,30 350,70 500,50 C650,30 850,70 1000,50 L1000,100 L0,100 Z" fill="rgba(125,211,192,0.1)"/></svg>') repeat-x;
+      background-size: 1000px 100px;
+      animation: wave 10s linear infinite;
+      bottom: 0;
+      top: auto;
+      height: 100px;
+    }
+
+    @keyframes wave {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-1000px); }
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--ocean-deep), var(--ocean-mid), var(--seafoam));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% { filter: drop-shadow(0 0 20px rgba(43, 119, 173, 0.3)); }
+      100% { filter: drop-shadow(0 0 40px rgba(125, 211, 192, 0.5)); }
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--text-light);
+      max-width: 800px;
+      margin: 0 auto;
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 80px auto;
+      padding: 0 40px;
+    }
+
+    .research-content {
+      background: rgba(254, 254, 254, 0.8);
+      border-radius: 20px;
+      padding: 50px;
+      box-shadow: 
+        0 20px 40px rgba(0,0,0,0.1),
+        0 0 60px rgba(125, 211, 192, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(125, 211, 192, 0.2);
+    }
+
+    .research-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--ocean-deep), var(--ocean-mid));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .research-section {
+      margin-bottom: 50px;
+      padding: 30px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.6);
+      border: 1px solid rgba(125, 211, 192, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .research-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(125, 211, 192, 0.2);
+      background: rgba(255, 255, 255, 0.9);
+    }
+
+    .research-section strong {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--ocean-deep);
+      display: block;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .research-section strong::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--ocean-mid), var(--seafoam));
+      border-radius: 2px;
+    }
+
+    .research-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 20px 0;
+    }
+
+    .research-section li {
+      margin-bottom: 15px;
+      padding: 15px 20px;
+      background: rgba(125, 211, 192, 0.05);
+      border-radius: 10px;
+      border-left: 4px solid var(--seafoam);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .research-section li:hover {
+      background: rgba(125, 211, 192, 0.1);
+      transform: translateX(10px);
+      border-left-color: var(--ocean-mid);
+    }
+
+    .research-section li::before {
+      content: '📚';
+      position: absolute;
+      left: -15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--pearl);
+      padding: 5px;
+      border-radius: 50%;
+      font-size: 0.8rem;
+    }
+
+    .research-section em {
+      color: var(--ocean-mid);
+      font-weight: 500;
+      font-style: normal;
+    }
+
+    .honours-section {
+      background: linear-gradient(135deg, rgba(255, 138, 101, 0.1), rgba(212, 175, 55, 0.1));
+      border: 1px solid rgba(255, 138, 101, 0.2);
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .honours-section em {
+      color: var(--coral);
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    footer {
+      background: linear-gradient(135deg, var(--ocean-deep), var(--ocean-mid));
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 100px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="none"><path d="M0,50 C150,30 350,70 500,50 C650,30 850,70 1000,50 L1000,0 L0,0 Z" fill="rgba(125,211,192,0.1)"/></svg>') repeat-x;
+      background-size: 1000px 100px;
+      animation: wave 15s linear infinite reverse;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-image-container {
+        right: 30px;
+        width: 150px;
+        height: 150px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-image-container {
+        position: relative;
+        right: auto;
+        top: auto;
+        transform: none;
+        margin: 30px auto;
+        width: 180px;
+        height: 180px;
+        display: block;
+      }
+      
+      .hero-image-container:hover {
+        transform: scale(1.05);
+      }
+      
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px 30px;
+      }
+      
+      .navbar nav {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 15px;
+        gap: 20px;
+      }
+      
+      .hero h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero p {
+        font-size: 1.1rem;
+      }
+      
+      .main-content {
+        padding: 0 20px;
+      }
+      
+      .research-content {
+        padding: 30px 20px;
+      }
+      
+      .research-content h2 {
+        font-size: 2rem;
+      }
+    }
+
+    /* Scroll animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Enhanced image animation on page load */
+    .hero-image-container {
+      animation: imageEntrance 1.2s ease-out 0.5s both;
+    }
+
+    @keyframes imageEntrance {
+      0% {
+        opacity: 0;
+        transform: translateY(-50%) translateX(50px) scale(0.8);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(-50%) translateX(0) scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="floating-particles"></div>
+  
+  <header>
+    <div class="navbar">
+      <img src="Design-of-New-Logo-of-IITJ-2.png" alt="IIT Jodhpur Logo" class="logo" />
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="Research.html" class="active">Research</a>
+        <a href="teaching.html">Teaching</a>
+        <a href="students.html">PhD Students</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <!-- Enhanced research image - Better positioned and more visible -->
+    <div class="hero-image-container">
+      <img src="Research.jpeg" alt="Research Image" />
+    </div>
+    
+    <h1>Research</h1>
+  </section>
+
+  <section class="main-content">
+    <div class="research-content fade-in">
+      <h2>Select Publications</h2>
+
+      <div class="research-section fade-in">
+        <strong>Monographs</strong>
+        <ul>
+          <li><em>Rich and Strange: Literatures of the Indian Ocean</em> (ongoing)</li>
+          <li><em><a href="https://link.springer.com/book/10.1057/9781137031891"> Utopia and the Village in South Asian Literatures</a></em> (Palgrave Macmillan, 2012; paperback reprint, 2017)</li>
+        </ul>
+        <div class="honours-section">
+          <em>Honours:</em> Nominated for the MLA First Book Prize (2013); ICAS Book Prize (2012–13); Featured on LSE Review of Books (2016); Part of the Michel Foucault Series (Palgrave UK)
+        </div>
+      </div>
+
+      <div class="research-section fade-in">
+        <strong>Edited Collections</strong>
+        <ul>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&citation_for_view=SDrF8XMAAAAJ:YOwf2qJgpHMC">"Transmodernity and Literature: Of Worlds in Contact",</a> <em>Asian Review of World Histories</em>, Vol. 13.2 (July 2025) and 14.1 (Jan 2026)[Brill]</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&citation_for_view=SDrF8XMAAAAJ:u5HHmVD_uO8C">"Maritime Transmodernities: Literary and Cultural Representations of the Indian Ocean World",</a> <em><a href="https://www.postcolonial.org/index.php/pct/issue/view/73">Postcolonial Text</a></em>, Vol. 14, Iss. 3 & 4, 2019</li>
+        
+        </ul>
+      </div>
+
+      <div class="research-section fade-in">
+        <strong>Book Chapters</strong>
+        <ul>
+          <li><a href="http://intersections.anu.edu.au/issue15/pattnaik_review.htm">"'Of women like us:' Sappho's Voice: Reading the Sapphic Palimpsest," in</a> <em>Lesbian Voices: Canada and the World</em>, 2006</li>
+          <li>"Introduction to Queer Theory," in <em>Literary Theory: Textual Applications</em>, 2002</li>
+        </ul>
+      </div>
+
+      <div class="research-section fade-in">
+        <strong>Journal Articles</strong>
+        <ul>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:Zph67rFs4hoC">"Transmodernity and Literature: The Lineaments of a Field," </a><em>Asian Review of World Histories</em>, July 2025 (forthcoming)</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:kNdYIx-mwKoC">"What is a Shakespearean Actor?: Fahadh Faasil and Malayalam Cinematic Adaptation in the 21st Century,"</a> <em><a href="https://www.tandfonline.com/doi/abs/10.1080/17450918.2025.2503972">Shakespeare</a>,</em>2025</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:KlAtU1dfN6UC">"'No one heard me!': Sexual Self-fashioning and the Child in 'Lihāf'",</a> <em>South Asian History and Culture</em>, 2023</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:roLk4NBRz8UC">"Transculturated Shakespeare: Malayalam Cinema and New Adaptive Modes",</a> <em>Indian Theatre Journal</em>, 2022</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:LkGwnXOMwfcC">"The Lumpenproletariat and the Itinerary of a Concept",</a> <em>Asian Review of World Histories</em>, 2021</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:_FxGoFyzp5QC">"Geoffrey Bawa and Ludic Modernism",</a> <em>Economic and Political Weekly</em>, 2020</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:u5HHmVD_uO8C">"Maritime Transmodernities and the Ibis Trilogy",</a> <em>Postcolonial Text</em>, 2019</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:zYLM7Y9cAGgC">"The Contours of the Field: Literatures of the Indian Ocean",</a> <em>Postcolonial Text</em>, 2019</li>
+          <li>"The Paradoxes of Realism: Martin Wickramasinghe and The Jātakas", <em>ERIAC</em> 2017</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:UeHWp8X0CEIC">"Translated Worlds", with Chandrima Chakraborty,</a> <em>Postcolonial Text</em>, 2015</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:qjMakFHDy7sC">"Giraya and the Gothic Space",</a> <em>University of Toronto Quarterly</em>, 2015</li>
+          <li>"Imagining Ceylon", <em>Phoenix</em>, 2015</li>
+          <li>"Sri Lanka", <em>World Literature Today</em>, 2014</li>
+          <li>"Colonial Cousins", <em>Nethra Review</em>, 2010</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&cstart=20&pagesize=80&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:IjCSPb-OGe4C">"Girish Karnad and Feminist Possibilities",</a> <em>Intersections</em>, 2009</li>
+        </ul>
+      </div>
+
+      <div class="research-section fade-in">
+        <strong>Interviews</strong>
+        <ul>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&pagesize=80&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:Tyk-4Ss8FVUC">"'Amphibious Histories': An Interview with Isabel Hofmeyr",</a> <em>Postcolonial Text</em>, 2019</li>
+          <li><a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=SDrF8XMAAAAJ&pagesize=80&sortby=pubdate&citation_for_view=SDrF8XMAAAAJ:W7OEmFMy1HYC">"'Arriving at writing': A Conversation with Abdulrazak Gurnah", with Sreya M. Datta,</a> <em>Postcolonial Text</em>, 2019</li>
+        </ul>
+      </div>
+
+      <div class="research-section fade-in">
+        <strong>Online Articles</strong>
+        <ul>
+          <li>"Class, Subalternity, and Ethical Choice in Modern India," <em>Café Dissensus</em>, 2014</li>
+          <li>"The Languages of Sexual Violence," <em>Kafila</em>, 2013</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Anupama Mohan. All rights reserved.</p>
+    <br>
+    <p style="color: white;">Developed by <a href="https://www.linkedin.com/in/avichal-sinha-22854020b" style="color: white; text-decoration: underline;">Avichal Sinha</a></p>
+</footer>
+
+  <script>
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.querySelector('.floating-particles');
+      const particleCount = 15;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 15 + 's';
+        particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Fade in animation on scroll
+    function handleScrollAnimation() {
+      const elements = document.querySelectorAll('.fade-in');
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (elementTop < windowHeight * 0.8) {
+          element.classList.add('visible');
+        }
+      });
+    }
+
+    // Header scroll effect
+    function handleHeaderScroll() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 50) {
+        header.style.background = 'rgba(254, 254, 254, 0.98)';
+        header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+      } else {
+        header.style.background = 'rgba(254, 254, 254, 0.95)';
+        header.style.boxShadow = 'none';
+      }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      handleScrollAnimation();
+      
+      // Trigger initial animation
+      setTimeout(() => {
+        document.querySelectorAll('.fade-in').forEach(el => {
+          el.classList.add('visible');
+        });
+      }, 500);
+    });
+
+    window.addEventListener('scroll', function() {
+      handleScrollAnimation();
+      handleHeaderScroll();
+    });
+  </script>
+</body>
+</html>          
